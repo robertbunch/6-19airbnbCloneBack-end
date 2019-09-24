@@ -31,14 +31,14 @@ router.post('/signup',(req, res, next)=>{
       });
     }else{
       // this email has not been used. lets add it
-      const insertUserQuery = ` INSERT INTO users
+      const insertUserQuery = `INSERT INTO users
         (first, last, email, password, token)
         VALUES
         (?,?,?,?,?)`
         // turn the password into something evil for db storage
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-        const token = randToken.uid(50);
+        const token = randToken.uid(50); // this is the users valet ticket
         db.query(insertUserQuery,[first,last,email,hash,token],(err2)=>{
           if(err2){throw err2}
           // Hooray!
