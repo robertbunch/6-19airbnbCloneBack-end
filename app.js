@@ -6,6 +6,7 @@ const helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var hostRouter = require('./routes/host');
 
 var app = express();
 app.use(helmet());
@@ -18,7 +19,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,5 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/host', hostRouter);
 
 module.exports = app;
