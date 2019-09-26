@@ -6,7 +6,7 @@ const helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var hostRouter = require('./routes/host');
+const hostRouter = require('./routes/host');
 
 var app = express();
 app.use(helmet());
