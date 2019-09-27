@@ -33,5 +33,24 @@ router.get('/cities',(req, res, next)=>{
   })
 })
 
+router.get('/abodes',(req, res, next)=>{
+  const abodesQuery = `SELECT * FROM homes
+    ORDER BY RAND()
+    LIMIT 8`
+  db.query(abodesQuery,(err, results)=>{
+    if(err) throw err;
+    res.json(results);
+  })
+})
+
+router.get('/abode/:abodeId',(req, res)=>{
+  const abodeId = req.params.abodeId;
+  const getAbodeQuery = `SELECT * FROM homes 
+    WHERE id = ?`;
+  db.query(getAbodeQuery,[abodeId],(err, result)=>{
+    if(err) throw err;
+    res.json(result[0])
+  })
+})
 
 module.exports = router;
