@@ -55,7 +55,7 @@ router.get('/abode/:abodeId',(req, res)=>{
 })
 
 // Post stripe token
-router.post('/stripe', (req, res, next) => {
+router.post('/payment/stripe', (req, res, next) => {
   //we dont need token. It's already been validated above.
   if(!res.locals.loggedIn){
     res.json({msg: "badToken"})
@@ -77,7 +77,7 @@ router.post('/stripe', (req, res, next) => {
           (uid, hid, paid)
           VALUES
           (?,?,?)`
-        db.insert(insertReservationQuery,[res.locals.uid,abodeId,1]);
+        db.query(insertReservationQuery,[res.locals.uid,abodeId,1]);
           res.json({
               msg: 'paymentSuccess'
           });
